@@ -26,9 +26,10 @@ foreach ($httpSampleNodeList as $httpSampleDomElement)
     {
       $num_failed++;
       $xml_testcase = $xUnitDom->createElement('testcase');
-      $xml_testcase->setAttribute('file', $httpSampleDomElement->getElementsByTagName('java.net.URL')->item(0)->nodeValue);
+      $url = $httpSampleDomElement->getElementsByTagName('java.net.URL')->item(0)->nodeValue;
+      $xml_testcase->setAttribute('file', $url);
 
-      $xml_testcase->setAttribute('name', $assertionResult->getElementsByTagName('name')->item(0)->nodeValue);
+      $xml_testcase->setAttribute('name', $assertionResult->getElementsByTagName('name')->item(0)->nodeValue . "|" . $url);
 
       $xml_failure = $xUnitDom->createElement('failure');
       $xml_failure->setAttribute('message', $assertionResult->getElementsByTagName('failureMessage')->item(0)->nodeValue);
